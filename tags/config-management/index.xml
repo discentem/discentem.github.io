@@ -6,7 +6,7 @@
     <description>Recent content in Config Management on Brandon Kurtz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Aug 2018 23:00:31 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 12 Aug 2018 21:25:00 +0000</lastBuildDate>
     
 	<atom:link href="https://discentem.github.io/tags/config-management/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>First steps in Salt, and Salt vs. Chef</title>
       <link>https://discentem.github.io/post/first_steps_in_salt_and_salt_vs_chef/</link>
-      <pubDate>Sat, 11 Aug 2018 23:00:31 -0400</pubDate>
+      <pubDate>Sun, 12 Aug 2018 21:25:00 +0000</pubDate>
       
       <guid>https://discentem.github.io/post/first_steps_in_salt_and_salt_vs_chef/</guid>
       <description>Credits First off, I want to thank my friend Wes Whetstone for giving me feedback on this post before I published it.
