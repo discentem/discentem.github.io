@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Macos on Brandon Kurtz</title>
+    <link>https://discentem.github.io/tags/macos/</link>
+    <description>Recent content in Macos on Brandon Kurtz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Jun 2018 18:09:30 -0400</lastBuildDate>
+    
+	<atom:link href="https://discentem.github.io/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Caching a macOS mobile AD account remotely</title>
+      <link>https://discentem.github.io/post/caching_a_macos_mobile_ad_account_remotely/</link>
+      <pubDate>Sun, 10 Jun 2018 18:09:30 -0400</pubDate>
+      
+      <guid>https://discentem.github.io/post/caching_a_macos_mobile_ad_account_remotely/</guid>
+      <description>Today I had to help a remote user wipe their macOS workstation for a fresh start. Fortunately my team has DEP and MDM set up so we were able to get up and running pretty quickly. Unfortunately, our DEP configuration is still rough around the edges; we don&amp;rsquo;t have NoMAD Login+ yet, so initiating AD auth remotely is complicated as the VPN wouldn&amp;rsquo;t be connected until after a user is logged in.</description>
+    </item>
+    
+  </channel>
+</rss>

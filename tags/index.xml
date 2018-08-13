@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Brandon Kurtz</title>
+    <link>https://discentem.github.io/tags/</link>
+    <description>Recent content in Tags on Brandon Kurtz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Aug 2018 23:00:31 -0400</lastBuildDate>
+    
+	<atom:link href="https://discentem.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Chef</title>
+      <link>https://discentem.github.io/tags/chef/</link>
+      <pubDate>Sat, 11 Aug 2018 23:00:31 -0400</pubDate>
+      
+      <guid>https://discentem.github.io/tags/chef/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Config Management</title>
+      <link>https://discentem.github.io/tags/config-management/</link>
+      <pubDate>Sat, 11 Aug 2018 23:00:31 -0400</pubDate>
+      
+      <guid>https://discentem.github.io/tags/config-management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Macos</title>
+      <link>https://discentem.github.io/tags/macos/</link>
+      <pubDate>Sun, 10 Jun 2018 18:09:30 -0400</pubDate>
+      
+      <guid>https://discentem.github.io/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Salt</title>
+      <link>https://discentem.github.io/tags/salt/</link>
+      <pubDate>Sat, 11 Aug 2018 23:00:31 -0400</pubDate>
+      
+      <guid>https://discentem.github.io/tags/salt/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

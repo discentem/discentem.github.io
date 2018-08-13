@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>First steps in Salt, and Salt vs. Chef</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://discentem.github.io/css/main.css">
+
+
+ <link rel="stylesheet" href="https://discentem.github.io/css/customfont.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.41" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">First steps in Salt, and Salt vs. Chef</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:kurtz.brandon@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/brandon-kurtz/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/discentem"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://macadmins.slack.com/messages/D1PJBJWLT"><i class="fa fa-slack"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/first_steps_in_salt_and_salt_vs_chef/">First steps in Salt, and Salt vs. Chef</a></h4>
+    <h5>August 11, 2018</h5>
+    
+    <a href="https://discentem.github.iotags/salt"><kbd class="item-tag">salt</kbd></a>
+    
+    <a href="https://discentem.github.iotags/chef"><kbd class="item-tag">chef</kbd></a>
+    
+    <a href="https://discentem.github.iotags/config-management"><kbd class="item-tag">config management</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="credits">Credits</h3>
+
+<p>First off, I want to thank my friend <a href="https://github.com/weswhet">Wes Whetstone</a> for giving me feedback on this post before I published it.</p>
+
+<p>He told me I was holding it (Salt) wrong and to stop trying to make Salt like Chef hehe! I&rsquo;m mostly kidding: he was very respectful in his criticism and he encouraged me to rewrite the code using <a href="https://docs.saltstack.com/en/latest/ref/states/writing.html">custom state modules</a> and <a href="https://docs.saltstack.com/en/latest/ref/modules/">custom execution modules</a> to make it <em>more properly</em> Salt-y.</p>
+
+<p>We agreed that it would great for me to publish this original post <em>anyway</em> and then later make a part 2 to demonstrate my progress. <strong>So look out for a part 2 coming soon!</strong></p>
+
+<hr />
+
+<h3 id="background">Background</h3>
+
+<p>Over the past few months, I have been experimenting with Salt on and off with the eventual goal of using it to configure Windows workstations and servers. And recently I got a new laptop at work, so I figured I would start writing Salt states to configure my own settings.</p>
+
+<p>Normally I would be biased towards Chef, as it was the first CM (configuration management) tool I used and I just generally prefer it. However, I&rsquo;m going to give Salt a try. Wes swears by it.</p>
+
+<h3 id="starting-down-the-salt-path">Starting down the Salt path</h3>
+
+<h5 id="u-picking-something-to-manage-apm-u"><u>Picking <em>something</em> to manage: APM</u></h5>
+
+<p>Even though managing APM (Atom Package Manager) might not seem like an intuitive place to start with config management on workstations, I believe it will be a helpful for talking about Salt in general. So even if you don&rsquo;t want/need to manage APM, you hopefully will learn stuff about Salt &amp; Chef. So continue reading! :)</p>
+
+<h5 id="u-salt-state-modules-cmd-run-u"><u>Salt State Modules: cmd.run</u></h5>
+
+<p>Atom provides a command line utility for managing APM packages for folks who prefer command line utilities over GUIs. As far as I know, there is no &ldquo;API&rdquo;-ish way to access APM. So, we must shell out to the APM cli tool. In Salt, you can interact with arbitrary binaries and cli tools via a state module called <code>cmd.run</code>.</p>
+
+<p>So managing APM in Salt could look something like my code below.</p>
+
+<h5 id="My-APM-Salt-State"><u>My APM Salt State</u></h5>
+
+<p>This is my first, incomplete stab (don&rsquo;t rub salt in it) at managing APM packages with Salt. Thus far my state can install APM packages but it can&rsquo;t do things like uninstall APM packages. Check out the code <a href="https://github.com/discentem/bk_salt/blob/master/salt/states/InstallAPMPackages/init.sls">here</a>. <br /><br /></p>
+
+<pre><code class="language-python">#!py
+
+def run():
+    config = {}
+
+    role = __salt__['grains.get']('role', None)
+    apm_packages = __salt__['pillar.get'](&quot;apm_packages:&quot; + str(role), None)
+
+    for package in apm_packages:
+
+        unless_value = 'if ([boolean](apm list | select-string %s)) { exit 0 } else { exit 1 }' % package
+
+        config['install apm package: {0}'.format(package)] = {
+            'cmd.run': [
+                { 'name': 'apm install {0}'.format(package) },
+                { 'shell': &quot;powershell&quot; },
+                { 'unless': unless_value }
+            ]
+        }
+
+    return config
+
+</code></pre>
+
+<h3 id="what-i-ve-learned">What I&rsquo;ve learned</h3>
+
+<p>Here are some things I learned about Salt through this process which I think are worth sharing. Hopefully these tips will help you as you start writing Salt. <strong>Disclaimer: These are opinionated.</strong>
+<br /></p>
+
+<h5 id="1-u-salt-renderers-python-for-the-win-u">(1) <u>Salt Renderers: Python for the win!</u></h5>
+
+<p><strong>I find it much easier to figure out what&rsquo;s going with my Salt code when it&rsquo;s written with the <a href="https://docs.saltstack.com/en/latest/ref/renderers/all/salt.renderers.py.html">Py renderer</a> instead of the default <a href="https://docs.saltstack.com/en/latest/ref/renderers/all/salt.renderers.jinja.html">Jinja renderer</a>.</strong>
+<br /><br />
+Consider the following example Python vs. Jinja example:</p>
+
+<p><code>'apm install {0}'.format(package)</code> vs. <code>{{ apm install %d | format(package) }}</code></p>
+
+<p>It&rsquo;s much more clear to me where the Powershell ends and the Python begins in the first example vs. where the Powershell ends and the Jinja begins in the second example. This point becomes more clear when you compare the documentation for each renderer.
+<br /></p>
+
+<h5 id="2-u-salt-requisites-unless-is-inflexible-u">(2) <u> Salt Requisites: <code>unless</code> is inflexible </u></h5>
+
+<p><strong>The Salt <code>unless</code> <a href="https://docs.saltstack.com/en/latest/ref/states/requisites.html">requisite</a> is less flexible than the equivalent Chef, <code>not_if</code>, because you are required to pass it a string.</strong>
+<br /><br />
+The string you pass will interpreted by the shell you specify, such as <code>{'shell':&quot;powershell&quot;}</code>, and Salt will get an exit code from the shell. This exit code determines whether not the state continues. Unfortunately, you cannot pass a Python expression to <code>unless</code> which evaluates to <code>True</code> or <code>False</code>: <strong>you must pass a string</strong>. From the Salt code above:</p>
+
+<p><code>'if ([boolean](apm list | select-string %s)) { exit 0 } else { exit 1 }'</code></p>
+
+<p>I found this frustrating compared to Chef, because in Chef you can simply specify a boolean value in Ruby:
+<br /><br />
+<code>stuff = powershell_out(&quot;command&quot;).stdout.include?(&quot;thing&quot;)</code>
+<br />
+<code>not_if { stuff }</code></p>
+
+<p>The <code>not_if</code> is being passed <code>stuff</code>: a real, Ruby boolean value. This eliminates the need to write potentially complex exit code logic in Powershell.</p>
+
+<p>For more context on this, consider this full Chef example in the next section.</p>
+
+<p><strong>What&rsquo;s the lesson here?</strong> Test your Powershell thoroughly in the normal shell or with <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.cmdmod.html#salt.modules.cmdmod.run_all">.\salt-call.bat &ndash;local cmd.run_all &ldquo;expression&rdquo; shell=powershell</a> before deploying so that you know your Salt <a href="https://docs.saltstack.com/en/latest/ref/states/requisites.html"><code>requisite</code></a> does what you expect.</p>
+
+<h3 id="apm-chef-resource">APM Chef Resource</h3>
+
+<p>This is the Chef equivalent to my <a href="#My-APM-Salt-State">APM Salt state</a> above. While it may be a bit harder to read (<strong>+1 for Salt</strong>), due in part to the busyness of the syntax highlighting, I prefer this because it&rsquo;s more condensed and requires less Powershell. Also, to reiterate a previous point, the boundaries between Ruby and Powershell are easier to see than the boundaries between Jinja and Powershell.</p>
+
+<p><br /></p>
+
+<pre><code class="language-ruby">resource_name :bk_apm
+default_action :run
+
+action :run do
+
+  apm_cmd = node['bk_apm']['cmd']
+  node['bk_apm']['packages'].each do |package|
+
+    apm_list = &quot;&amp; \&quot;#{apm_cmd}\&quot; list | select-string #{package}&quot;
+    execute &quot;install apm package: #{package}&quot; do
+      command &quot;\&quot;#{apm_cmd}\&quot; install #{package}&quot;
+      not_if { powershell_out(apm_list).stdout.include?(package) }
+      action :run
+    end
+
+  end
+end
+</code></pre>
+
+<h3 id="future-adventures-in-salt-and-chef">Future adventures in Salt and Chef</h3>
+
+<p>Hopefully I&rsquo;ll blog about more Salt and Chef stuff in the near future.</p>
+
+<p>Please feel free to pull request any of my code, give me feedback, or let me know if I got something wrong. You can contact me via email or Slack, but Slack is better :)</p>
+
+<p>Here are direct links to message me on <a href="https://macadmins.slack.com/messages/D1PJBJWLT">MacAdmins Slack</a> and the <a href="https://saltstackcommunity.slack.com/messages/D8HJUDMSQ/">SaltStack Community Slack</a>.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
