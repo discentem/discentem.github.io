@@ -18,7 +18,7 @@
       
       <guid>https://discentem.github.io/post/first_steps_in_salt_and_salt_vs_chef/</guid>
       <description>Credits First off, I want to thank my friend Wes Whetstone for giving me feedback on this post before I published it.
-He told me I was holding it (Salt) wrong and to stop trying to make Salt like Chef hehe! I&amp;rsquo;m mostly kidding: he was very respectful in his criticism and he encouraged me to rewrite the code using custom state modules and custom execution modules to make it more properly Salt-y.</description>
+He told me I was holding it (Salt) wrong and to stop trying to make Salt act like Chef. He was very respectful in this criticism and he encouraged me to rewrite the code using custom state modules and custom execution modules to make it more proper Salt code.</description>
     </item>
     
     <item>
